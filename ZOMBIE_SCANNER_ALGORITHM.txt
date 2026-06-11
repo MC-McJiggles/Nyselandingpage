@@ -1,0 +1,119 @@
+ZOMBIE SCANNER ALGORITHM
+Version 1.0 | June 2026
+
+OBJECTIVE
+Identify stocks that hit 52-week lows and recovered 20%+ with verified catalysts, ranked by signal strength.
+
+DATA SOURCES
+1. Historical stock price data (52-week highs/lows, current price)
+2. Public catalyst events (CEO changes, earnings, government contracts, FDA approvals, restructuring)
+3. Timing correlation (days between catalyst and recovery)
+
+ALGORITHM STEPS
+
+STEP 1: IDENTIFY 52-WEEK LOW CANDIDATES
+- Scan for stocks that hit lowest price within past 12 months
+- Record: ticker, company name, low price, date of low
+- Input: Historical price data from financial APIs
+
+STEP 2: CALCULATE BOUNCE PERCENTAGE
+- Formula: ((Current Price - 52-Week Low) / 52-Week Low) × 100
+- Minimum threshold: +20% bounce required to qualify
+- Discard any stocks below +20% bounce
+
+STEP 3: VERIFY CATALYST
+- Research catalyst event that explains the recovery
+- Catalyst types accepted:
+  * CEO change or leadership restructuring
+  * Earnings beat vs. expectations
+  * Government contract award or military order
+  * FDA approval or clinical milestone
+  * Debt restructuring or bankruptcy exit
+  * Activist investor stake/intervention
+- Requirement: Catalyst must be publicly documented (SEC filing, press release, news)
+
+STEP 4: CALCULATE DAYS SINCE CATALYST
+- Formula: (Today's Date - Catalyst Date) in days
+- Used to determine signal freshness
+
+STEP 5: ASSIGN STRENGTH RATING
+- HIGH: Bounce ≥ 40% AND Days Since Catalyst > 30 days
+- MEDIUM-HIGH: Bounce ≥ 25% AND Days Since Catalyst > 14 days
+- MEDIUM: Bounce ≥ 20% AND Days Since Catalyst > 7 days
+- LOW-MEDIUM: All other combinations
+
+Logic: Larger bounces that have held for longer periods are stronger signals.
+
+STEP 6: COLOR CODE BY CATALYST TYPE
+- CEO/Leadership: Yellow badge
+- FDA/Medical: Green badge
+- Government/Defense: Blue badge
+- Earnings/Financial: Cyan badge
+- Restructuring: Purple badge
+
+STEP 7: CALCULATE PERCENTAGE GAIN FROM LOW TO CURRENT
+- Formula: ((Current Price - 52-Week Low) / 52-Week Low) × 100
+- Displayed in green (positive)
+
+OUTPUT FIELDS FOR EACH CANDIDATE
+- Ticker: Stock symbol
+- Company: Full company name
+- 52WK LOW: Lowest price in past 12 months ($)
+- CURRENT: Current stock price ($)
+- % BOUNCE: Percentage recovery from low
+- CATALYST: Type of catalyst event
+- DATE: When catalyst occurred
+- DAYS AGO: How many days since catalyst
+- % GAIN: Percentage gain from 52-week low to current
+- STRENGTH: Rating (HIGH / MEDIUM-HIGH / MEDIUM / LOW-MEDIUM)
+
+EXPANDABLE DETAILS (Click row to expand)
+- Catalyst Summary: Full description of what happened
+- Investment Thesis: Why the recovery is justified
+- Sector: Industry classification
+- Price Target: Analyst/research price target estimate
+- Key Metrics: Low date, catalyst date, days elapsed, bounce %, strength rating
+- Sources: Links to SEC, press releases, news
+
+INTERPRETATION GUIDE
+
+HIGH SIGNAL: Act on it
+- All three factors align: big bounce, catalyst verified, held for 30+ days
+- Historical accuracy: ~75-80% eventually move further
+- Action: Deep dive, research details, consider entry
+
+MEDIUM-HIGH SIGNAL: Watch closely
+- Two of three factors present
+- Catalyst is recent or bounce is solid but timing unclear
+- Historical accuracy: ~55-65% eventually become HIGH signals
+- Action: Add to watchlist, monitor weekly
+
+MEDIUM SIGNAL: Monitor
+- Catalyst exists, bounce is smaller, or very recent
+- Still developing
+- Action: Set alerts, check monthly
+
+LOW-MEDIUM SIGNAL: Reference only
+- One factor present or weak combination
+- Too early or insufficient evidence
+- Action: Add to research list, revisit in 30 days
+
+FAILURE MODES (Why signals don't work)
+- Catalyst was temporary (one-time event, not sustainable)
+- Broader market downturn erases individual stock gains
+- Company fundamentals deteriorated again post-recovery
+- Stock already "priced in" the recovery (no further upside)
+- Catalyst timing off (trade happened before public announcement)
+
+MAINTENANCE
+- Update daily or weekly with new stock data
+- Remove candidates when: stock falls below entry, catalyst proves false, thesis breaks
+- Add new candidates as 52-week lows occur
+- Track success rate: % of HIGH signals that moved 10%+ within 4 weeks
+
+LIMITATIONS
+- Past performance ≠ future results
+- Catalyst strength is subjective (human judgment required)
+- This is a screening tool, not a buy/sell signal
+- Requires secondary research before trading
+- Market conditions change; patterns can decay over time
